@@ -404,7 +404,7 @@
 			 var bebida = $scope.bebidas[i];
 			 if(bebida.familyCode == sentFamilyCode){
 				 //Estamos en la familia correcta, devolvemos el array de subfamilias
-				 alert("Code: "+sentFamilyCode);
+				 //alert("Code: "+sentFamilyCode);
 				 return bebida;
 			 }
 		 }
