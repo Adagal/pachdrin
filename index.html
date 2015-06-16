@@ -23,7 +23,16 @@
 	
 	<!----------------------------------------------Header ---------------------------------------------->
 	<header>
-		<div class="bannerNav">
+		<div class="bannerNav" ng-show="familiaEnlace(selectedFamily)">
+			<!-- La navegación siempre va a los premiums de la familia,
+			 Si la familia no tiene premium entonces va a los 3 de base-->
+			<a href ng-click="changeFamily(devuelveFamCompleta(selectedFamily).enlaceUno,1)"><img ng-src="banner/{{selectedFamily}}-a.jpg" class="headerBanner" style="width: 277px" /></a>
+			<a href ng-click="changeFamily(devuelveFamCompleta(selectedFamily).enlaceDos,1)"><img ng-src="banner/{{selectedFamily}}-b.jpg" class="headerBanner" style="width: 277px" /></a>
+			<a href ng-click="changeFamily(devuelveFamCompleta(selectedFamily).enlaceTres,1)"><img ng-src="banner/{{selectedFamily}}-c.jpg" class="headerBanner" style="width: 280px" /></a>
+		</div>
+		<div class="bannerNav" ng-show="familiaEnlace(selectedFamily) == false">
+			<!-- La navegación siempre va a los premiums de la familia,
+			 Si la familia no tiene premium entonces va a los 3 de base-->
 			<img ng-src="banner/{{selectedFamily}}-a.jpg" class="headerBanner" style="width: 277px" />
 			<img ng-src="banner/{{selectedFamily}}-b.jpg" class="headerBanner" style="width: 277px" />
 			<img ng-src="banner/{{selectedFamily}}-c.jpg" class="headerBanner" style="width: 280px" />

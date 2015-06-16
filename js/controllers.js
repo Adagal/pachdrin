@@ -1,6 +1,6 @@
  angular.module('pachaDrinks', ['ngSanitize', 'ngTouch']).controller('drinksController', function ($scope, $sce, $window) {
     $scope.bebidas = [
-		{familyName:'Vodka', familyCode:'1', hasPremium: '1', families: [
+		{familyName:'Vodka', familyCode:'1', hasPremium: '1', tieneEnlace: '1', enlaceUno: '1', enlaceDos: '1', enlaceTres:'1', families: [
 			{ subFamilyName: 'More', products: [
 				{ titulo: 'Grey goose 70 cl', precio: '400', cantidad: '0', premium: '1' },
 				{ titulo: 'Grey goose 1,5l', precio: '875', cantidad: '0', premium: '1' },
@@ -34,7 +34,7 @@
 			] }
 		]},
 		
-		{familyName:'Gin', familyCode:'2', hasPremium: '1', families: [
+		{familyName:'Gin', familyCode:'2', hasPremium: '1', tieneEnlace: '1', enlaceUno: '2', enlaceDos: '2', enlaceTres:'2', families: [
 			{ subFamilyName: 'More', products: [
 				{ titulo: 'Bombay Sapphire', precio: '375', cantidad: '0', premium: '1' },
 				{ titulo: 'Star Bombay', precio: '375', cantidad: '0', premium: '1' },
@@ -53,7 +53,7 @@
 			] }
 		]},
 		
-		{familyName:'Tequila', familyCode:'3', hasPremium: '1', families: [
+		{familyName:'Tequila', familyCode:'3', hasPremium: '1', tieneEnlace: '1', enlaceUno: '3', enlaceDos: '3', enlaceTres:'3', families: [
 			{ subFamilyName: 'More', products: [
 				{ titulo: 'Patron Silver', precio: '450', cantidad: '0', premium: '1' },
 				{ titulo: 'Patron a&ntilde;ejo', precio: '500', cantidad: '0', premium: '1' },
@@ -69,7 +69,7 @@
 			] }
 		]},
 		
-		{familyName:'Rum', familyCode:'4', hasPremium: '1', families: [
+		{familyName:'Rum', familyCode:'4', hasPremium: '1', tieneEnlace: '0', enlaceUno: '1', enlaceDos: '2', enlaceTres:'3', families: [
 			{ subFamilyName: 'More', products: [
 				{ titulo: 'Bacardi', precio: '325', cantidad: '0', premium: '1' },
 				{ titulo: 'Bacardi 8 years', precio: '375', cantidad: '0', premium: '1' },
@@ -83,7 +83,7 @@
 			] }
 		]},
 		
-		{familyName:'Whisky', familyCode:'5', hasPremium: '1', families: [
+		{familyName:'Whisky', familyCode:'5', hasPremium: '1', tieneEnlace: '0', enlaceUno: '1', enlaceDos: '2', enlaceTres:'3', families: [
 			{ subFamilyName: 'More', products: [
 				{ titulo: 'Dewards 12 years', precio: '350', cantidad: '0', premium: '1' },
 				{ titulo: 'Chivas Regal', precio: '350', cantidad: '0', premium: '0' },
@@ -100,7 +100,7 @@
 			] }
 		]},
 		
-		{familyName:'Red Bull', familyCode:'6', hasPremium: '0', families: [
+		{familyName:'Red Bull', familyCode:'6', hasPremium: '0', tieneEnlace: '1', enlaceUno: '1', enlaceDos: '2', enlaceTres:'3', families: [
 			{ subFamilyName: 'More', products: [
 				{ titulo: 'Red Bull Energy Drink', precio: '15', cantidad: '0', premium: '0' },
 				{ titulo: 'Red Bull Sugarfre', precio: '15', cantidad: '0', premium: '0' },
@@ -111,7 +111,7 @@
 			] }
 		]},
 			
-		{familyName:'Wine', familyCode:'7', hasPremium: '0', families: [
+		{familyName:'Wine', familyCode:'7', hasPremium: '0', tieneEnlace: '1', enlaceUno: '1', enlaceDos: '2', enlaceTres:'3', families: [
 			{ subFamilyName: 'White | Blanco', products: [
 				{ titulo: 'Louis Latour Montrached Grand', precio: '1200', cantidad: '0', premium: '0' },
 				{ titulo: 'Cloudy Bay 70 cl', precio: '350', cantidad: '0', premium: '0' },
@@ -131,14 +131,14 @@
 			] }
 		]},
 		
-		{familyName:'Cava', familyCode:'8', hasPremium: '0', families: [
+		{familyName:'Cava', familyCode:'8', hasPremium: '0', tieneEnlace: '1', enlaceUno: '', enlaceDos: '', enlaceTres:'', families: [
 			{ subFamilyName: 'Vi&ntilde;a Fragrance D\'or', products: [
 				{ titulo: 'Gold Imperial 23K Brut Gran Reserva 2010 75 cl', precio: '350', cantidad: '0', premium: '0' },
 				{ titulo: 'Gold Imperial 23K Brut Gran Reserva 2010 1,5l', precio: '400', cantidad: '0', premium: '0' }
 			] }
 		]},
 		
-		{familyName:'Champagne', familyCode:'9', hasPremium: '0', families: [
+		{familyName:'Champagne', familyCode:'9', hasPremium: '0', tieneEnlace: '1', enlaceUno: '1', enlaceDos: '2', enlaceTres:'3', families: [
 			{ subFamilyName: 'DOM PeRIGNON LUMINOUS', products: [
 				{ titulo: 'Dp VINTAGE 75cl', precio: '500', cantidad: '0', premium: '0' },
 				{ titulo: 'Dp VINTAGE MAGNUM 1,5L', precio: '1200', cantidad: '0', premium: '0' },
@@ -361,23 +361,54 @@
 		}
 		//alert(total);
 		return total;
-	}
-	
-	$scope.retrieveSub = function(sentFamilyCode){
-		
-		//Recogemos todas las subfamilias segun el codigo facilitado y las devolvemos
-		var myarray = false;
-		
-		for(var i = 0; i < $scope.bebidas.length; i++){
-			var bebida = $scope.bebidas[i];
-			if(bebida.familyCode == sentFamilyCode){
-				//Estamos en la familia correcta, devolvemos el array de subfamilias
-				var myarray = bebida.families;
-			}
-		}
-		
-		return myarray;
 	};
+
+	 $scope.familiaEnlace = function(fc){
+		var tieneEnlace = '0';
+
+		 for(var i = 0; i < $scope.bebidas.length; i++){
+			 var bebida = $scope.bebidas[i];
+			 if(bebida.familyCode == fc){
+				 //Estamos en la familia correcta, devolvemos el array de subfamilias
+
+				 if(bebida.tieneEnlace == '1'){
+					 return true;
+				 }else{
+					 return false;
+				 }
+
+			 }
+		 }
+
+	 };
+
+	 $scope.retrieveSub = function(sentFamilyCode){
+
+		 //Recogemos todas las subfamilias segun el codigo facilitado y las devolvemos
+		 var myarray = false;
+
+		 for(var i = 0; i < $scope.bebidas.length; i++){
+			 var bebida = $scope.bebidas[i];
+			 if(bebida.familyCode == sentFamilyCode){
+				 //Estamos en la familia correcta, devolvemos el array de subfamilias
+				 var myarray = bebida.families;
+			 }
+		 }
+
+		 return myarray;
+	 };
+
+	 $scope.devuelveFamCompleta = function(sentFamilyCode){
+
+		 for(var i = 0; i < $scope.bebidas.length; i++){
+			 var bebida = $scope.bebidas[i];
+			 if(bebida.familyCode == sentFamilyCode){
+				 //Estamos en la familia correcta, devolvemos el array de subfamilias
+				 alert("Code: "+sentFamilyCode);
+				 return bebida;
+			 }
+		 }
+	 };
 	
 	$scope.configureSlider = function(numslides){
 		$scope.maxSlides = numslides;
