@@ -1,4 +1,4 @@
-angular.module('pachaDrinks', []).controller('drinksController', function ($scope, $sce) {
+ angular.module('pachaDrinks', ['ngSanitize', 'ngTouch']).controller('drinksController', function ($scope, $sce, $window) {
     $scope.bebidas = [
 		{familyName:'Vodka', familyCode:'1', hasPremium: '1', families: [
 			{ subFamilyName: 'More', products: [

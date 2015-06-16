@@ -8,6 +8,7 @@
   
 	<script src="lib/angular.min.js"></script>
 	<script src="lib/angular-sanitize.min.js"></script>
+	<script src="lib/angular-touch.js"></script>
 	<script src="js/app.js"></script>
 	<script src="js/controllers.js"></script>
   
@@ -52,8 +53,8 @@
 					<div class="adelante">
 						<img src="img/flecha-izq.jpg" ng-click="changeSlide(1)" />
 					</div>
-					<div ng-repeat="favorite in getPremiumElements(selectedFamily)" ng-show="actualSlide == $index+1" class="sliderImage">
-						<img ng-src="product/{{selectedFamily}}/{{$index+1}}.jpg" /><br/>
+					<div ng-repeat="favorite in getPremiumElements(selectedFamily)" ng-swipe-left="changeSlide(-1)" ng-swipe-right="changeSlide(1)" ng-show="actualSlide == $index+1" class="sliderImage">
+						<img ng-src="product/{{selectedFamily}}/{{$index+1}}.jpg" class="nonDraggableImage" /><br/>
 						<input name="bebida{{$index}}" ng-model="favorite.cantidad" style="width: 120px; text-align: center;" type="number" />
 					</div>
 					<div class="atras">
@@ -91,9 +92,9 @@
 				<div class="adelante">
 					<img src="img/flecha-izq.jpg" ng-click="changeSlide3(1)" />
 				</div>
-				<div class="central">
+				<div class="central" ng-swipe-right="changeSlide3(1)" ng-swipe-left="changeSlide3(-1)">
 					<div ng-repeat="favorite in getPremiumElements(selectedFamily)" ng-show="($index/3) < actualSlide && ($index/3)+1 >= actualSlide" class="sliderImage">
-						<img ng-src="product/{{selectedFamily}}/{{$index+1}}.jpg" /><br/>
+						<img ng-src="product/{{selectedFamily}}/{{$index+1}}.jpg" class="nonDraggableImage" /><br/>
 						<input name="bebida{{$index}}" ng-model="favorite.cantidad" style="width: 120px; text-align: center;" type="number" />
 					</div>
 				</div>

@@ -13,6 +13,10 @@ body{
 	height: 768px;
 }
 
+.nonDraggableImage{
+	-webkit-user-drag: none;
+}
+
 /*******************************
 * CSS Portada
 *******************************/

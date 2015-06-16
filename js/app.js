@@ -1,3 +1,3 @@
 'use strict';
-var app = angular.module('pachaDrinks', ['ngSanitize']);
+var app = angular.module('pachaDrinks', ['ngSanitize', 'ngTouch']);
 
