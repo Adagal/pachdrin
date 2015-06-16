@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="es" ng-app="pachaDrinks">
+<head>
+	<meta charset="utf-8">
+	<title>Pacha Drinks</title>
+	<link rel="stylesheet" href="css/app.css"/>
+
+  
+	<script src="lib/angular.min.js"></script>
+	<script src="lib/angular-sanitize.min.js"></script>
+	<script src="js/app.js"></script>
+	<script src="js/controllers.js"></script>
+  
+</head>
+<body ng-controller="drinksController" ng-init="changeFamily(1,1)">
+	<!----------------------------------------------Portada ---------------------------------------------->
+	<div ng-class="portadaClass">
+		<img src="img/portada-01.jpg" ng-click=" portadaClass = 'portadaHidden' " />
+	</div>
+	<!----------------------------------------------End Portada ---------------------------------------------->
+	
+	
+	<!----------------------------------------------Header ---------------------------------------------->
+	<header>
+		<div class="bannerNav">
+			<img ng-src="banner/{{selectedFamily}}-a.jpg" class="headerBanner" style="width: 277px" />
+			<img ng-src="banner/{{selectedFamily}}-b.jpg" class="headerBanner" style="width: 277px" />
+			<img ng-src="banner/{{selectedFamily}}-c.jpg" class="headerBanner" style="width: 280px" />
+		</div>
+		<img src="img/go-premium.jpg" ng-click="changeFamily(100,0)" class="premiumLink" />
+	</header>
+	<!----------------------------------------------End Header ---------------------------------------------->
+	
+	<!----------------------------------------------Navigation Menu ---------------------------------------------->
+	<div class="navigation">
+		<img ng-src="img/drinks.jpg" alt="" class="tituloNav" />
+		<ul>
+			<li ng-repeat="family in bebidas" ng-class="selectedFamily == family.familyCode ? 'activeFamily' : 'notActive'"><a href ng-click="changeFamily(family.familyCode,0)"><img ng-src="menu/{{family.familyCode}}.jpg" /></a></li>
+			<li><a href ng-click="changeFamily(0,0)"><img src="menu/10.jpg" /></a></li>
+		</ul>
+	</div>
+	<!----------------------------------------------End Navigation Menu ---------------------------------------------->
+	
+	<!----------------------------------------------Content Div ---------------------------------------------->
+	<div class="content">
+		<div ng-show="selectedFamily > 0 && selectedFamily< 50 && seePremium == 0">
+			<img ng-src="titulos/{{ selectedFamily }}.jpg" alt="" class="familyTitle" />
+			
+			<div ng-class="premiumClass">
+				<!-- Slider cuando tiene hasPremium 1 -->
+				<div ng-show="familyHasFavorite(selectedFamily)" class="sliders">
+					<div class="adelante">
+						<img src="img/flecha-izq.jpg" ng-click="changeSlide(1)" />
+					</div>
+					<div ng-repeat="favorite in getPremiumElements(selectedFamily)" ng-show="actualSlide == $index+1" class="sliderImage">
+						<img ng-src="product/{{selectedFamily}}/{{$index+1}}.jpg" /><br/>
+						<input name="bebida{{$index}}" ng-model="favorite.cantidad" style="width: 120px; text-align: center;" type="number" />
+					</div>
+					<div class="atras">
+						<img src="img/flecha-der.jpg" ng-click="changeSlide(-1)" />
+					</div>
+				</div>
+			</div>
+			
+			<div ng-class="listClass">
+				<!-- Lista de todas las subfamilias -->
+				<ul>
+					<li class="listado" ng-repeat="family in retrieveSub(selectedFamily)">
+						<span ng-bind-html="convertirHTML(family.subFamilyName)"></span>
+						<!-- Dentro de cada subfamilia lista de todos los productos -->
+						<div class="bebida" ng-repeat="bottle in family.products">
+							<div class="nombre">
+								{{bottle.titulo}}
+							</div>
+							<div class="precio">
+								{{bottle.precio}}&nbsp;&euro;
+							</div>
+							<div class="seleccionar">
+								<input type="number"  ng-model="bottle.cantidad"  name="selection" ></input>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		
+		<!------------------ Vista de los slides Premium, solo premium, sin listado ------------------->
+		<div class="premiumOnly" ng-show="seePremium == 1 && selectedFamily!=3">
+			<img ng-src="titulos/{{ selectedFamily }}.jpg" alt="" class="familyTitle" />
+			<div class="slidertres">
+				<div class="adelante">
+					<img src="img/flecha-izq.jpg" ng-click="changeSlide3(1)" />
+				</div>
+				<div class="central">
+					<div ng-repeat="favorite in getPremiumElements(selectedFamily)" ng-show="($index/3) < actualSlide && ($index/3)+1 >= actualSlide" class="sliderImage">
+						<img ng-src="product/{{selectedFamily}}/{{$index+1}}.jpg" /><br/>
+						<input name="bebida{{$index}}" ng-model="favorite.cantidad" style="width: 120px; text-align: center;" type="number" />
+					</div>
+				</div>
+				<div class="atras">
+					<img src="img/flecha-der.jpg" ng-show="maxslides < 3" ng-click="changeSlide3(-1)" />
+				</div>
+			</div>
+		</div>
+		<!-- Bebida Patron -->
+		<div class="premiumOnly" ng-show="seePremium == 1 && selectedFamily==3">
+			<img ng-src="titulos/{{ selectedFamily }}.jpg" alt="" class="familyTitle" />
+			<div class="patronPage">
+				<div class="central">
+					<div ng-repeat="favorite in getPremiumElements(selectedFamily)"class="patronImages">
+						<img ng-src="product/{{selectedFamily}}/{{$index+1}}.jpg" /><br/>
+						<input name="bebida{{$index}}" ng-model="favorite.cantidad" style="width: 120px; text-align: center;" type="number" />
+					</div>
+				</div>
+			</div>
+		</div>
+			
+			
+		<div ng-show="selectedFamily<1" class="carrito">
+			<img src="titulos/order.jpg" alt="" class="familyTitle" />
+			<div class="cartContent">
+				<p ng-show="getTotal() < 1 ">There is no selected Drinks.</p>
+				<div ng-repeat="drinkFamily in getSelectedElements()"  ng-show="getTotal() > 0" class="cartList">
+					<div class="textos">{{drinkFamily.titulo}}&nbsp;({{drinkFamily.precio*drinkFamily.cantidad}}&nbsp;&euro;)</div>
+					<div class="modify"><span class="colorGrey">Quantity/Cantidad:</span> <input type="number" ng-model="drinkFamily.cantidad" style="width: 15%;" /></div>
+				</div>
+				<p>&nbsp;</p>
+				<h3>Total: {{ getTotal() }} &euro;</h3>
+				<p>&nbsp;</p>
+				<a class="borrar" href ng-click="allZero()">CLEAR</a>
+			</div>
+		</div>
+		
+		<!------------------ Menu premium ------------------->
+		<div ng-show="selectedFamily==100" class="premiumNavigationPage">
+			<img src="titulos/premium.jpg" alt="" class="familyTitle" />
+			<div class="premiumWrapper">
+				<div class="premiumPills">
+					<img src="img/premium-gg.jpg"  ng-click="changeFamily(1,1)" />
+				</div>
+				<div class="premiumPills">
+					<img src="img/premium-bs.jpg" ng-click="changeFamily(2,1)" />
+				</div>
+				<div class="premiumPills">
+					<img src="img/premium-pt.jpg" ng-click="changeFamily(3,1)" />
+				</div>
+			</div>
+		</div>
+		
+	</div>
+	<!----------------------------------------------End Content Div ---------------------------------------------->
+	
+	<div style="clear: both;">&nbsp;</div>
+	
+	
+	<!----------------------------------------------Footer ---------------------------------------------->
+	<footer>
+		<img src="img/pie.jpg" class="banner" /><img src="img/pacha.jpg" class="indexButton" ng-click=" portadaClass = 'portada' " />
+	</footer>
+	<!----------------------------------------------End Footer ---------------------------------------------->
+	
+	
+</body>
+</html>

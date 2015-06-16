@@ -1,0 +1,328 @@
+/*******************************
+* CSS Generales
+*******************************/
+*{
+	padding: 0;
+	margin: 0;
+}
+body{
+	margin: 0;
+	padding: 0;
+	position: absolute;
+	width: 1024px;
+	height: 768px;
+}
+
+/*******************************
+* CSS Portada
+*******************************/
+
+.portada{
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 1024px;
+	transition: all 0.5s linear;
+	max-height: 768px;
+	z-index: 100;
+}
+
+.portadaHidden{
+	position: absolute;
+	top: 0;
+	left: 0;
+	max-height: 0;
+	width: 1024px;
+	overflow: hidden;
+	transition: all 0.5s linear;
+}
+
+.portada img, .portadaHidden img{
+	width: 100%;
+	height: auto;
+}
+
+/*******************************
+* CSS Header
+*******************************/
+header{
+	width: 1024px;
+}
+
+.premiumLink{
+	cursor: pointer;
+	max-width: 190px;
+	height: 209px !important;
+	margin: 0px -2px 0px -2px;
+}
+.headerBanner{
+	margin: 0px -2px 0px -2px;
+	padding: 0;
+	height: auto;
+}
+header .bannerNav{
+	max-width: 834px;
+	display: inline-block;
+}
+
+
+
+/*******************************
+* CSS Nav
+*******************************/
+.navigation{
+	float: right;
+	max-width: 188px;
+	margin-top: 30px;
+	border-left: 2px solid #C3C3C3;
+}
+.navigation .activeFamily a{
+	color: #C3C3C3;
+}
+.navigation img{
+	width: 100%;
+}
+.navigation ul{
+	text-align: center;
+}
+.navigation ul li{
+	list-style-type: none;
+	display: inline-block;
+	width: 100%;
+	text-align: center;
+}
+
+.navigation ul li img{
+	width: 158px;
+	height: auto;
+}
+
+.navigation .tituloNav{
+	margin-top: -30px;
+}
+
+/*******************************
+* CSS Contenidos
+*******************************/
+.content{
+	max-width: 834px;
+	margin-top: -2px;
+}
+.content .familyTitle{
+	max-width: 834px
+}
+
+.content .left, .content .right{
+	display: inline-block;
+	vertical-align: top;
+	max-width: 414px;
+	width: 414px;
+	height:  390px;
+	border-bottom: 1px solid black;
+}
+
+.content .right{
+	overflow-y: scroll;
+}
+
+.listado{
+	color: #767676;
+	text-transform: uppercase;
+	margin-top: 15px;
+}
+
+.listado .bebida{
+	margin: 3px 0 3px 0;
+}
+
+.listado .nombre, .listado .precio, .listado .seleccionar{
+	display: inline-block;
+	text-transform: uppercase;
+	font-size: 13px;
+}
+.listado .precio{
+	color: #767676;
+	text-align: right;
+	width: 17%;
+}
+.listado .nombre {
+	color: #16267e;
+	width: 70%;
+	font-weight: bold;
+	letter-spacing: 1px;
+}
+.listado .seleccionar {
+	color: #16267e;
+	width: 10%;
+}
+.listado .seleccionar input{
+	width: 100%;
+}
+
+.columned{
+	margin-left: 46px;
+	width: 750px;
+	height: 380px;
+	overflow-y: scroll;
+}
+
+.columned ul{
+	list-style-type: none;
+}
+
+/*******************************
+* CSS Contenidos Patron
+*******************************/
+.patronPage{
+	margin-left: 40px;
+	width: 754px;
+}
+
+.patronPage .patronImages{
+	max-width: 25%;
+	display: inline-block;
+	text-align: center;
+}
+
+.patronPage .patronImages img{
+	width: 100%;
+	height: auto;
+}
+
+
+/*******************************
+* CSS Premium Page
+*******************************/
+.premiumNavigationPage{
+	width: 830px;
+	height: 476px;
+	text-align: center;
+	display: table-cell;
+	vertical-align: middle;
+}
+.premiumNavigationPage .premiumPills{
+	width: 250px;
+	display: inline-block;
+	cursor: pointer;
+}
+.premiumNavigationPage .premiumPills img{
+	width: 100%;
+	height: auto;
+	margin-top: 92px;
+}
+.premiumWrapper{
+	height: 389px;
+}
+
+/*******************************
+* CSS Sliders
+*******************************/
+.sliders{
+	width: 100%;
+	overflow: hidden;
+	text-align: center;
+}
+.sliders .adelante img, .sliders .atras img{
+	width: 22px;
+}
+.sliders div{
+	display: inline-block;
+	max-height: 100%;
+	height: 100%;
+	vertical-align: middle;
+}
+.sliders .sliderImage{
+	width: 250px;
+}
+.sliders .sliderImage img{
+	width: 100%;
+	height: auto;
+}
+
+.slidertres{
+	margin-left: 44px;
+	width: 790px;
+}
+
+.slidertres div{
+	display: inline-block;
+	vertical-align: middle;
+	text-align: center;
+}
+.slidertres .adelante img, .slidertres .atras img{
+	width: 22px;
+}
+.slidertres .sliderImage{
+	max-width: 230px;
+}
+
+.slidertres .sliderImage img{
+	width: 100%;
+	height: auto;
+}
+
+/*******************************
+* CSS Footer
+*******************************/
+footer{
+	max-width: 1024px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 10;
+}
+
+footer .banner{
+	width: 834px;
+}
+footer .indexButton{
+	width: 190px;
+}
+
+/*******************************
+* CSS Carrito
+*******************************/
+.carrito .cartContent{
+	padding-left: 48px;
+	color: #16267e;
+	height:  390px;
+	overflow-y: scroll;
+}
+
+.carrito .cartList div{
+	display: inline-block;
+}
+
+.carrito .cartList div input{
+	text-align: center;
+}
+
+.carrito h3{
+	text-transform: uppercase;
+}
+
+.carrito .cartList .textos{
+	width: 60%;
+	text-transform: uppercase;
+	font-weight: bold;
+	letter-spacing: 1px;
+	font-size: 13px;
+}
+
+.carrito .cartList .modify{
+	width: 37%;
+}
+
+.carrito .cartContent .borrar{
+	background-color: #16267e;
+	padding: 15px;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-decoration: none;
+	color: #fff;
+	font-size: 13px;
+}
+
+.colorGrey{
+	color: #C3C3C3;
+}
